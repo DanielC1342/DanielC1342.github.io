@@ -1,4 +1,8 @@
-.headbarheadbar {
+.navbar {
     background-color: black;
-    height: 200px;
+}
+#goodboy {
+    background-color: whitesmoke;
+    height: 350px;
+    width: 350px;
 }
