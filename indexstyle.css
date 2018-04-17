@@ -2,7 +2,69 @@
     background-color: black;
 }
 #goodboy {
-    background-color: whitesmoke;
+    background-color: grey;
     height: 350px;
     width: 350px;
 }
+
+.game {
+    background-color: black;
+    height: 700px;
+    width: 700px;
+}
+
+.simonlight {
+    height: 300px;
+    width: 300px;
+    margin: 23px;
+}
+
+.red {
+    background-color: #ba0000;
+}
+
+.blu {
+    background-color: #0000ba;
+}
+
+.yel {
+    background-color: #baba00;
+}
+
+.grn {
+    background-color: #008c00;
+}
+
+.line {
+    position: relative;
+    top: 5px;
+}
+
+@media screen and (max-width: 576px) {
+    h3 {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    ul {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    div#goodboy {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    h2 {
+        text-align: center;
+    }
+    .game {
+        height: 300px;
+        width: 300px;
+    }
+
+    .simonlight {
+        height: 120px;
+        width: 120px;
+        margin: 13px;
+    }
+}
+
