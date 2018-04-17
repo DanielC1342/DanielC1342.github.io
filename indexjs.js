@@ -155,3 +155,62 @@ $(".grn").click(function() {
     console.log(input);
 });
 
+var SA = { lat: 29.423017, lng: -98.48527 };
+var mapOptions = {
+    zoom: 5,
+    center: SA
+};
+var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+var SAMarker = new google.maps.Marker({
+    position: SA,
+    animation: google.maps.Animation.DROP,
+    draggable: true,
+    map: map
+});
+
+
+google.maps.event.addListener(SAMarker, "dragend", function() {
+
+    //Weather Report
+    var request = $.get("http://api.openweathermap.org/data/2.5/forecast/daily",{
+        APPID: "8f32c0149a278cdb5f995fbb3d98eba5",
+        lat: SAMarker.getPosition().lat(),
+        lon: SAMarker.getPosition().lng(),
+        units: "imperial",
+        cnt: 3
+    });
+    request.done(function (response) {
+        // console.log(response);
+        //temp
+        $("#day1").html("<span>"+Math.round(response.list[0].temp.max)+"&deg;/"+Math.round(response.list[0].temp.min)+"&deg;</span>");
+        $("#day2").html("<span>"+Math.round(response.list[1].temp.max)+"&deg;/"+Math.round(response.list[1].temp.min)+"&deg;</span>");
+        $("#day3").html("<span>"+Math.round(response.list[2].temp.max)+"&deg;/"+Math.round(response.list[2].temp.min)+"&deg;</span>");
+        //icon
+        var iconCode1 = response.list[0].weather[0].icon;
+        var iconCode2 = response.list[1].weather[0].icon;
+        var iconCode3 = response.list[2].weather[0].icon;
+        var iconUrl1 = "http://openweathermap.org/img/w/" + iconCode1 + ".png";
+        var iconUrl2 = "http://openweathermap.org/img/w/" + iconCode2 + ".png";
+        var iconUrl3 = "http://openweathermap.org/img/w/" + iconCode3 + ".png";
+        $("#day1").append("<img class='col-3 mx-auto' src='" + iconUrl1  + "'>");
+        $("#day2").append("<img class='col-3 mx-auto' src='" + iconUrl2  + "'>");
+        $("#day3").append("<img class='col-3 mx-auto' src='" + iconUrl3  + "'>");
+        //weather
+        $("#day1").append("<span>"+response.list[0].weather[0].main+"</span>");
+        $("#day2").append("<span>"+response.list[1].weather[0].main+"</span>");
+        $("#day3").append("<span>"+response.list[2].weather[0].main+"</span>");
+        //humidity
+        $("#day1").append("<span><strong>Humidity: </strong>"+response.list[0].humidity+"</span>");
+        $("#day2").append("<span><strong>Humidity: </strong>"+response.list[1].humidity+"</span>");
+        $("#day3").append("<span><strong>Humidity: </strong>"+response.list[2].humidity+"</span>");
+        //wind
+        $("#day1").append("<span><strong>Wind: </strong>"+response.list[0].speed+"</span>");
+        $("#day2").append("<span><strong>Wind: </strong>"+response.list[1].speed+"</span>");
+        $("#day3").append("<span><strong>Wind: </strong>"+response.list[2].speed+"</span>");
+        //pressure
+        $("#day1").append("<span><strong>Pressure: </strong>"+response.list[0].pressure+"</span>");
+        $("#day2").append("<span><strong>Pressure: </strong>"+response.list[1].pressure+"</span>");
+        $("#day3").append("<span><strong>Pressure: </strong>"+response.list[2].pressure+"</span>");
+    });
+});
+
