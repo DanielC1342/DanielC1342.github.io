@@ -52,7 +52,6 @@ function correct() {
 }
 
 
-
 var input = [];
 var pattern = [];
 var counter = 0;
