@@ -51,7 +51,6 @@ function correct() {
     setTimeout(reset,500);
 }
 
-
 var input = [];
 var pattern = [];
 var counter = 0;
